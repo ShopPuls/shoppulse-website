@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const appUrl = "https://app.shoppulse.co.za";
@@ -40,6 +41,29 @@ const productCards = [
     eyebrow: "Team Access",
     title: "Give each role the right view.",
     copy: "Owners, admins, managers, technicians and viewers get access that matches the way your workshop works.",
+  },
+];
+
+const productShots = [
+  {
+    title: "Revenue dashboard",
+    copy: "Month-by-month revenue and job status at a glance.",
+    image: "/product/dashboard-revenue.png",
+  },
+  {
+    title: "Job control",
+    copy: "Search, filter, open and clean up test jobs from one table.",
+    image: "/product/jobs-list.png",
+  },
+  {
+    title: "Company branding",
+    copy: "Upload and control dashboard and PDF logos per workspace.",
+    image: "/product/branding-settings.png",
+  },
+  {
+    title: "Revenue reports",
+    copy: "Review revenue by month, year and client without spreadsheet cleanup.",
+    image: "/product/reports-revenue.png",
   },
 ];
 
@@ -100,63 +124,29 @@ export default function HomePage() {
 
         <div className="app-showcase" aria-label="ShopPulse product preview">
           <div className="showcase-glow" />
-          <div className="browser-shell">
+          <div className="browser-shell hero-screenshot-shell">
             <div className="browser-bar">
               <span />
               <span />
               <span />
               <strong>app.shoppulse.co.za</strong>
             </div>
-            <div className="product-frame">
-              <aside className="mock-sidebar">
-                <div className="mock-logo">SP</div>
-                <span className="active" />
-                <span />
-                <span />
-                <span />
-              </aside>
-              <section className="mock-main">
-                <div className="mock-header">
-                  <div>
-                    <small>Workshop Job</small>
-                    <h2>SP-1042</h2>
-                  </div>
-                  <button>Save Job</button>
-                </div>
-                <div className="metric-row">
-                  <div>
-                    <small>Stage</small>
-                    <strong>Ready for Collection</strong>
-                  </div>
-                  <div>
-                    <small>Status</small>
-                    <strong>Completed</strong>
-                  </div>
-                  <div>
-                    <small>Total</small>
-                    <strong>R 12 480</strong>
-                  </div>
-                </div>
-                <div className="job-table">
-                  <div className="table-head">
-                    <span>No</span>
-                    <span>Description</span>
-                    <span>Repairs</span>
-                    <span>Total</span>
-                  </div>
-                  {[
-                    ["1", "Barrel - ID x OD x L", "Chrome", "R 3 200"],
-                    ["2", "Gland seal land", "Machining", "R 1 850"],
-                    ["3", "Shaft - OD x L", "Strip and polish", "R 2 900"],
-                  ].map((row) => (
-                    <div className="table-row" key={row[0]}>
-                      {row.map((cell) => (
-                        <span key={cell}>{cell}</span>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-              </section>
+            <div className="hero-live-frame">
+              <Image
+                src="/product/dashboard-revenue.png"
+                alt="ShopPulse dashboard showing monthly revenue and job status"
+                width={1900}
+                height={900}
+                priority
+              />
+              <div className="floating-insight insight-one">
+                <small>Current month</small>
+                <strong>Revenue tracked</strong>
+              </div>
+              <div className="floating-insight insight-two">
+                <small>Status</small>
+                <strong>Live workshop view</strong>
+              </div>
             </div>
           </div>
         </div>
@@ -189,14 +179,13 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="dark-feature-band">
-        <div>
-          <p className="eyebrow">Product Walkthrough</p>
-          <h2>A premium system your clients can feel in every quote.</h2>
+      <section className="live-product-section">
+        <div className="live-product-copy">
+          <p className="eyebrow">Live Product Views</p>
+          <h2>Show clients the actual system before they even sign in.</h2>
           <p>
-            Add your introduction video here when it is ready. For launch, this section already shows
-            buyers what ShopPulse does: structure the work, present the brand and keep the business
-            moving.
+            Instead of a video placeholder, the website now uses real ShopPulse screens with a subtle
+            animated showcase. It feels polished now, and we can still add a proper intro video later.
           </p>
           <div className="hero-actions">
             <Link className="button button-light" href="/demo">
@@ -204,15 +193,23 @@ export default function HomePage() {
             </Link>
           </div>
         </div>
-        <div className="video-card">
-          <button className="play-button" aria-label="Play ShopPulse introduction video">
-            Play
-          </button>
-          <div className="video-lines">
-            <span />
-            <span />
-            <span />
-          </div>
+        <div className="screenshot-orbit" aria-label="ShopPulse product screenshots">
+          {productShots.map((shot, index) => (
+            <article className={`screenshot-card shot-${index + 1}`} key={shot.title}>
+              <div className="screenshot-image">
+                <Image
+                  src={shot.image}
+                  alt={`ShopPulse ${shot.title.toLowerCase()} screen`}
+                  width={1900}
+                  height={900}
+                />
+              </div>
+              <div>
+                <h3>{shot.title}</h3>
+                <p>{shot.copy}</p>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
