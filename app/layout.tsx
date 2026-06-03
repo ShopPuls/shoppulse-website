@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import Image from "next/image";
 import Link from "next/link";
 import "./globals.css";
@@ -67,6 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <a href="https://app.shoppulse.co.za/login">App Login</a>
           </div>
         </footer>
+        <Analytics />
       </body>
     </html>
   );
